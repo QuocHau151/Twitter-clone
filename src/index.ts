@@ -1,5 +1,5 @@
 import express from 'express'
-import usersRouter from './routes/users.router'
+import usersRouter from './routes/users.routes'
 import databaseService from './services/database.services'
 import defaultErrorHandler from './middlewares/errors.middleware'
 databaseService.connect()
