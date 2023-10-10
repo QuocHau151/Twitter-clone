@@ -19,7 +19,7 @@ export const USER_MESSAGE = {
   CONFIRM_PASSWORD_MUST_BE_A_STRING: 'Confirm password must be a string',
   CONFIRM_PASSWORD_LENGTH_MUST_BE_FROM_8_TO_100: 'Confirm password length must be from 8 to 100',
   CONFIRM_PASSWORD_MUST_BE_STRONG: 'Confirm password must be strong',
-  CONFIRM_PASSWPRD_MUST_BE_SAME_AS_PASSWORD: 'Confirm password must be same as password',
+  CONFIRM_PASSWORD_MUST_BE_SAME_AS_PASSWORD: 'Confirm password must be same as password',
   DATE_OF_BIRTH_MUST_BE_ISO8601: 'Date of birth must be ISO8601',
   LOGIN_SUCCESS: 'Login success',
   REGISTER_SUCCESS: 'Register success',
@@ -57,5 +57,14 @@ export const USER_MESSAGE = {
   UPDATE_MY_PROFILE_SUCCESS: 'Update my profile success',
   GET_PROFILE_SUCCESS: 'Get profile success',
   FOLLOW_SUCCESS: 'Follow success',
-  INVALID_FOLLOWER_USER_ID: 'Invalid follower user id'
+  INVALID_FOLLOWER_USER_ID: 'Invalid follower user id',
+  FOLLOWED: 'Followed',
+  INVALID_USER_ID: 'Invalid user id',
+  UNFOLLOW_SUCCESS: 'Unfollow success',
+  USERNAME_DOES_NOT_MATCH_THE_RULE:
+    'Username does not match the rule, A-Z, 0-9, including 1-15 characters,  please try again',
+  USERNAME_ALREADY_EXISTS: 'Username already exists',
+  OLD_PASSWORD_IS_INCORRECT: 'Old password is incorrect',
+  CHANGE_PASSWORD_SUCCESS: 'Change password success',
+  GMAIL_NOT_VERIFIED: 'Gmail not verify'
 } as const

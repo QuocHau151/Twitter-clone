@@ -1,14 +1,17 @@
 import express from 'express'
 import {
+  changePasswordController,
   followController,
   forgotPasswordController,
   getMeController,
   getProfileController,
   loginController,
   logoutController,
+  oauthController,
   registerController,
   resendVerifyEmailController,
   resetPasswordController,
+  unFollowController,
   updateMeController,
   verifyEmailController,
   verifyForgotPasswordTokenController
@@ -16,6 +19,7 @@ import {
 import {
   UpdateMeValidator,
   accessTokenValidator,
+  changePasswordValidator,
   emailVerifyTokenValidator,
   followValidator,
   forgotPasswordValidator,
@@ -23,6 +27,7 @@ import {
   refreshTokenValidator,
   registerValidator,
   resetPasswordValidator,
+  unFollowValidator,
   verifiedUserValidator,
   verifyForgotPasswordTokenValidator
 } from '~/middlewares/users.middlewares'
@@ -38,6 +43,14 @@ const usersRouter = express.Router()
  *
  */
 usersRouter.post('/login', loginValidator, wrapRequestHandler(loginController))
+/**
+ * Description. OAth with google
+ * Path: /oath/google
+ * Method: GET
+ * Body: {email: string, password: string}
+ *
+ */
+usersRouter.get('/oauth/google', wrapRequestHandler(oauthController))
 /**
  * Description. Register a new user
  * Path: /users/register
@@ -155,5 +168,33 @@ usersRouter.post(
   verifiedUserValidator,
   followValidator,
   wrapRequestHandler(followController)
+)
+/**
+ * Description. Delete following users
+ * Path: /follow/user_id
+ * Method:  DELETE
+ *  Header: {Authorization: Bearer <access_token>}
+ *
+ */
+usersRouter.delete(
+  '/follow/:user_id',
+  accessTokenValidator,
+  verifiedUserValidator,
+  unFollowValidator,
+  wrapRequestHandler(unFollowController)
+)
+/**
+ * Description. Change password
+ * Path: /change-password
+ * Method:  PUT
+ *  Header: {Authorization: Bearer <access_token>}
+ *  Body: {old_password: string, new_password: string, confirm_password: string}
+ */
+usersRouter.put(
+  '/change-password',
+  accessTokenValidator,
+  verifiedUserValidator,
+  changePasswordValidator,
+  wrapRequestHandler(changePasswordController)
 )
 export default usersRouter

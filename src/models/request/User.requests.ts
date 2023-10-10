@@ -11,7 +11,7 @@ export interface RegisterReqBody {
   name: string
   email: string
   password: string
-  confirmPassword: string
+  confirm_password: string
   date_of_birth: string
 }
 export interface logoutReqBody {
@@ -43,6 +43,14 @@ export interface UpdateMeReqBody {
 }
 export interface FollowReqBody {
   followed_user_id: string
+}
+export interface changePasswordReqBody {
+  old_password: string
+  new_password: string
+  confirm_new_password: string
+}
+export interface UnFollowPReqParams {
+  user_id: string
 }
 export interface GetProfileParams {
   username: string
