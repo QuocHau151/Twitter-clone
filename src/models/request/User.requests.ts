@@ -1,6 +1,6 @@
 import exp from 'constants'
 import { JwtPayload } from 'jsonwebtoken'
-import { TokenType } from '~/constants/enums'
+import { TokenType, UserVerifyStatus } from '~/constants/enums'
 import { logoutController } from '~/controllers/users.controllers'
 
 export interface LoginReqBody {
@@ -15,6 +15,9 @@ export interface RegisterReqBody {
   date_of_birth: string
 }
 export interface logoutReqBody {
+  refresh_token: string
+}
+export interface RefreshTokenReqBody {
   refresh_token: string
 }
 export interface forgotPasswordReqBody {
@@ -58,4 +61,7 @@ export interface GetProfileParams {
 export interface TokenPayload extends JwtPayload {
   user_id: string
   token_type: TokenType
+  verify: UserVerifyStatus
+  exp: number
+  iat: number
 }

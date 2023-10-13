@@ -4,6 +4,7 @@ import { ParamsDictionary } from 'express-serve-static-core'
 import {
   FollowReqBody,
   LoginReqBody,
+  RefreshTokenReqBody,
   RegisterReqBody,
   TokenPayload,
   UnFollowPReqParams,
@@ -56,6 +57,18 @@ export const logoutController = async (
   const { refresh_token } = req.body
   const result = await usersService.logout(refresh_token)
   return res.json(result)
+}
+export const refreshTokenController = async (
+  req: express.Request<ParamsDictionary, any, RefreshTokenReqBody>,
+  res: express.Response
+) => {
+  const { refresh_token } = req.body
+  const { user_id, verify, exp } = req.decoded_refresh_token as TokenPayload
+  const result = await usersService.refreshToken({ user_id, refresh_token, verify, exp })
+  return res.json({
+    message: USER_MESSAGE.REFRESH_TOKEN_SUCCESS,
+    result
+  })
 }
 export const verifyEmailController = async (
   req: express.Request<ParamsDictionary, any, VerifyEmailReqBody>,
