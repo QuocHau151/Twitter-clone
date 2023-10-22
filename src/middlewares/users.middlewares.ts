@@ -14,6 +14,7 @@ import { verifyToken } from '~/utils/jwt'
 import { validate } from '~/utils/validator'
 import { UserVerifyStatus } from '~/constants/enums'
 import { REGEX_USERNAME } from '~/constants/regex'
+import { middleware } from '../../../Client/middleware'
 
 const passwordSchema: ParamSchema = {
   notEmpty: {
@@ -261,7 +262,7 @@ export const accessTokenValidator = validate(
               req.decoded_authorization = decoded_authorization
             } catch {
               throw new ErrorWithStatus({
-                message: USER_MESSAGE.ACCESS_TOKEN_IS_INVALID,
+                message: USER_MESSAGE.Jwt_EXPIRED,
                 status: HTTP_STATUS.UNAUTHORIZED
               })
             }
@@ -698,3 +699,13 @@ export const changePasswordValidator = validate(
     ['body']
   )
 )
+export const isUserLoggedInValidator = (
+  middleware: (req: express.Request, res: express.Response, next: express.NextFunction) => void
+) => {
+  return (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (req.headers.authorization) {
+      return middleware(req, res, next)
+    }
+    next()
+  }
+}
